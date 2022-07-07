@@ -1,4 +1,6 @@
+import 'package:doctorly/models/state/doct_by_id_state.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AboutDoctor extends StatelessWidget {
   const AboutDoctor({Key? key}) : super(key: key);
@@ -10,7 +12,8 @@ class AboutDoctor extends StatelessWidget {
         left: 25,
       ),
       child: Text(
-        'jhasvjbasmbkbasjkbs bkadkash asdkh askj xasna xkas xixasx x asx  x  kx ajxkas xa x a x kx kx  akx k xiw xwx lwxw xiw xwjkxxi xx  x qx xx wjx x w x wx xqwx qw xwxw ui xqwx hxj qwxqwxwx x qwwxqwxwkqw xqwx w x  wx qwxwxkqwkx qkx x k xqw xiqwix k  wx jk w x xh wx w mx w xw w w xj xqwuw',
+        Provider.of<DoctByIdState>(context).doctByIdStateData?.description ??
+            '',
         style: TextStyle(fontSize: 17, height: 1.5, wordSpacing: 1.5),
       ),
     );

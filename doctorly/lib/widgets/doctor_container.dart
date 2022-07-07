@@ -5,19 +5,23 @@ class DoctorContainer extends StatelessWidget {
   final String doctorName;
   final String categoryName;
   final String qualification;
-
+  final VoidCallback navigator;
   const DoctorContainer(
-      this.doctorImage, this.doctorName, this.categoryName, this.qualification);
+      {required this.doctorImage,
+      required this.doctorName,
+      required this.categoryName,
+      required this.qualification,
+      required this.navigator});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
+    return InkWell(
+      onTap: navigator,
       child: Container(
         margin: const EdgeInsets.all(10),
         child: Card(
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: Color.fromARGB(255, 176, 101, 189)),
+            side: BorderSide(color: Theme.of(context).primaryColor),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Container(
@@ -28,24 +32,27 @@ class DoctorContainer extends StatelessWidget {
                 ClipOval(
                   child: Image.network(doctorImage),
                 ),
-                FittedBox(
+                Flexible(
                   child: Text(
                     doctorName,
+                    maxLines: 1,
                     style: TextStyle(height: 2),
                   ),
                 ),
-                FittedBox(
+                Flexible(
                   child: Text(
                     categoryName,
+                    maxLines: 1,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
                   ),
                 ),
-                FittedBox(
+                Flexible(
                   child: Text(
                     qualification,
+                    maxLines: 1,
                     style: TextStyle(height: 1.5),
                   ),
                 ),

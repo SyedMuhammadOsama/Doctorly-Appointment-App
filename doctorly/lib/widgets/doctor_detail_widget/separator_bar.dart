@@ -8,13 +8,13 @@ class SeparatorBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(20),
-      child: const Center(
+      child: Center(
         child: DottedLine(
           direction: Axis.horizontal,
           lineLength: 50,
           lineThickness: 1,
           dashLength: 4.0,
-          dashColor: Color.fromARGB(255, 176, 101, 189),
+          dashColor: Theme.of(context).primaryColor,
           dashRadius: 0.0,
           dashGapLength: 4.0,
           dashGapColor: Colors.transparent,

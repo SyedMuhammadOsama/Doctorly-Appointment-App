@@ -1,4 +1,6 @@
+import 'package:doctorly/models/state/doct_by_id_state.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DoctorInfo extends StatelessWidget {
   const DoctorInfo({Key? key}) : super(key: key);
@@ -12,7 +14,11 @@ class DoctorInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Doctor Name',
+              Provider.of<DoctByIdState>(context)
+                      .doctByIdStateData
+                      ?.user
+                      ?.name ??
+                  '',
               style: Theme.of(context)
                   .textTheme
                   .headline6
@@ -21,7 +27,11 @@ class DoctorInfo extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Specialization',
+                Provider.of<DoctByIdState>(context)
+                        .doctByIdStateData
+                        ?.specializations
+                        ?.name ??
+                    '',
                 style: TextStyle(fontSize: 17),
               ),
             ),

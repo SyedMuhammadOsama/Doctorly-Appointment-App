@@ -3,16 +3,22 @@ import 'package:flutter/material.dart';
 class Categoriesitem extends StatelessWidget {
   final String categoryImage;
   final String categoryText;
-  Categoriesitem(this.categoryImage, this.categoryText);
+  final VoidCallback navigator;
+
+  Categoriesitem(
+      {required this.categoryImage,
+      required this.categoryText,
+      required this.navigator});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
+    return InkWell(
+      onTap: navigator,
       child: Card(
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-            side: BorderSide(color: Color.fromARGB(255, 176, 101, 189))),
+          borderRadius: BorderRadius.circular(25),
+          side: BorderSide(color: Theme.of(context).primaryColor),
+        ),
         child: Container(
           margin: const EdgeInsets.all(10),
           width: 80,
@@ -26,9 +32,10 @@ class Categoriesitem extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              FittedBox(
+              Flexible(
                 child: Text(
                   categoryText,
+                  maxLines: 1,
                   style: const TextStyle(fontSize: 17),
                 ),
               )
