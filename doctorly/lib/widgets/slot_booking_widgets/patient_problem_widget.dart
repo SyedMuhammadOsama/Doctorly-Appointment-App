@@ -1,25 +1,37 @@
 import 'package:flutter/material.dart';
 
 class PatientProblemWidget extends StatelessWidget {
-  const PatientProblemWidget({Key? key}) : super(key: key);
+  final String? Function(String?)? validator;
+  final TextEditingController controller;
+  final String hint;
+  const PatientProblemWidget(
+      {Key? key,
+      required this.validator,
+      required this.controller,
+      required this.hint})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(top: 20, bottom: 10, left: 10, right: 10),
-        child: TextField(
+        child: TextFormField(
+          controller: controller,
+          validator: validator,
           maxLength: 200,
           maxLines: 5,
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-          ),
+          style: Theme.of(context).textTheme.bodyLarge?.merge(const TextStyle(
+                color: Colors.black,
+              )),
           cursorColor: Colors.black,
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.all(25),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
             hintText: 'Write Symptoms',
-            hintStyle: const TextStyle(color: Color(0xFF9B8F8F), fontSize: 20),
-            // fillColor: const Color(0xFF131212),
+            hintStyle: Theme.of(context)
+                .textTheme
+                .bodyLarge
+                ?.merge(const TextStyle(color: Color(0xFF9B8F8F))),
             filled: true,
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50),
@@ -28,6 +40,18 @@ class PatientProblemWidget extends StatelessWidget {
                   color: Color.fromARGB(255, 176, 101, 189),
                 )),
             focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(50),
+                borderSide: const BorderSide(
+                  width: 2,
+                  color: Color.fromARGB(255, 176, 101, 189),
+                )),
+            errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(50),
+                borderSide: const BorderSide(
+                  width: 2,
+                  color: Color.fromARGB(255, 176, 101, 189),
+                )),
+            focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50),
                 borderSide: const BorderSide(
                   width: 2,

@@ -1,41 +1,32 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
-class RadioButtonWidget extends StatefulWidget {
+class RadioButtonWidget extends StatelessWidget {
   String? gender;
-
-  RadioButtonWidget(this.gender);
-
-  @override
-  State<RadioButtonWidget> createState() => _RadioButtonWidgetState();
-}
-
-class _RadioButtonWidgetState extends State<RadioButtonWidget> {
-  onChanged() {}
-
+  Function(String?)? onChanged;
+  RadioButtonWidget(this.gender, this.onChanged, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         RadioListTile<String?>(
-          title: const Text('Male'),
-          value: 'Male',
-          groupValue: widget.gender,
-          onChanged: (String? value) => setState(
-            () {
-              widget.gender = value;
-            },
+          title: Text(
+            'Male',
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
+          value: 'Male',
+          groupValue: gender,
+          onChanged: onChanged,
         ),
         RadioListTile<String?>(
-          title: const Text('Female'),
-          value: 'Female',
-          groupValue: widget.gender,
-          onChanged: (String? value) => setState(
-            () {
-              widget.gender = value;
-            },
-          ),
-        )
+            title: Text(
+              'Female',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            value: 'Female',
+            groupValue: gender,
+            onChanged: onChanged)
       ],
     );
   }

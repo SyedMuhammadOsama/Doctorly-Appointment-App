@@ -8,7 +8,7 @@ class DoctByIdApiParsed {
   int? noOfPatients;
   Specializations? specializations;
   Qualifications? qualifications;
-  List<Slot>? slot;
+  Slot? slot;
 
   DoctByIdApiParsed(
       {this.id,
@@ -24,45 +24,40 @@ class DoctByIdApiParsed {
 
   DoctByIdApiParsed.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
     description = json['description'];
     image = json['image'];
     experience = json['experience'];
     rating = json['rating'];
     noOfPatients = json['no_of_patients'];
     specializations = json['specializations'] != null
-        ? new Specializations.fromJson(json['specializations'])
+        ? Specializations.fromJson(json['specializations'])
         : null;
     qualifications = json['qualifications'] != null
-        ? new Qualifications.fromJson(json['qualifications'])
+        ? Qualifications.fromJson(json['qualifications'])
         : null;
-    if (json['slot'] != null) {
-      slot = <Slot>[];
-      json['slot'].forEach((v) {
-        slot!.add(new Slot.fromJson(v));
-      });
-    }
+    slot = json['slot'] != null ? Slot.fromJson(json['slot']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
-    data['description'] = this.description;
-    data['image'] = this.image;
-    data['experience'] = this.experience;
-    data['rating'] = this.rating;
-    data['no_of_patients'] = this.noOfPatients;
-    if (this.specializations != null) {
-      data['specializations'] = this.specializations!.toJson();
+    data['description'] = description;
+    data['image'] = image;
+    data['experience'] = experience;
+    data['rating'] = rating;
+    data['no_of_patients'] = noOfPatients;
+    if (specializations != null) {
+      data['specializations'] = specializations!.toJson();
     }
-    if (this.qualifications != null) {
-      data['qualifications'] = this.qualifications!.toJson();
+    if (qualifications != null) {
+      data['qualifications'] = qualifications!.toJson();
     }
-    if (this.slot != null) {
-      data['slot'] = this.slot!.map((v) => v.toJson()).toList();
+    if (slot != null) {
+      data['slot'] = slot!.toJson();
     }
     return data;
   }
@@ -94,13 +89,13 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['registered_at'] = this.registeredAt;
-    data['confirmed'] = this.confirmed;
-    data['role'] = this.role;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['name'] = name;
+    data['email'] = email;
+    data['registered_at'] = registeredAt;
+    data['confirmed'] = confirmed;
+    data['role'] = role;
     return data;
   }
 }
@@ -119,10 +114,10 @@ class Specializations {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['image'] = this.image;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['name'] = name;
+    data['image'] = image;
     return data;
   }
 }
@@ -142,15 +137,38 @@ class Qualifications {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['qualification_name'] = this.qualificationName;
-    data['procurement_year'] = this.procurementYear;
-    data['institute_name'] = this.instituteName;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['qualification_name'] = qualificationName;
+    data['procurement_year'] = procurementYear;
+    data['institute_name'] = instituteName;
     return data;
   }
 }
 
 class Slot {
+  List<SlotData>? slotData;
+
+  Slot({this.slotData});
+
+  Slot.fromJson(Map<String, dynamic> json) {
+    if (json['slot_data'] != null) {
+      slotData = <SlotData>[];
+      json['slot_data'].forEach((v) {
+        slotData!.add(SlotData.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    if (slotData != null) {
+      data['slot_data'] = slotData!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class SlotData {
   int? id;
   String? day;
   String? start;
@@ -159,7 +177,7 @@ class Slot {
   int? appointmentDuration;
   int? numSlots;
 
-  Slot(
+  SlotData(
       {this.id,
       this.day,
       this.start,
@@ -168,7 +186,7 @@ class Slot {
       this.appointmentDuration,
       this.numSlots});
 
-  Slot.fromJson(Map<String, dynamic> json) {
+  SlotData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     day = json['day'];
     start = json['start'];
@@ -179,14 +197,14 @@ class Slot {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['day'] = this.day;
-    data['start'] = this.start;
-    data['end'] = this.end;
-    data['consultation_fee'] = this.consultationFee;
-    data['appointment_duration'] = this.appointmentDuration;
-    data['num_slots'] = this.numSlots;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['day'] = day;
+    data['start'] = start;
+    data['end'] = end;
+    data['consultation_fee'] = consultationFee;
+    data['appointment_duration'] = appointmentDuration;
+    data['num_slots'] = numSlots;
     return data;
   }
 }

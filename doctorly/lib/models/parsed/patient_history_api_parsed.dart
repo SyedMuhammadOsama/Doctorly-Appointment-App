@@ -1,9 +1,9 @@
-class DoctorsApiParsed {
+class PatientHistoryApiParsed {
   List<Data>? data;
 
-  DoctorsApiParsed({this.data});
+  PatientHistoryApiParsed({this.data});
 
-  DoctorsApiParsed.fromJson(Map<String, dynamic> json) {
+  PatientHistoryApiParsed.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
@@ -23,64 +23,62 @@ class DoctorsApiParsed {
 
 class Data {
   int? id;
-  User? user;
-  String? description;
-  String? image;
-  int? experience;
-  double? rating;
-  int? noOfPatients;
-  Specializations? specializations;
-  Qualifications? qualifications;
-  Slot? slot;
+  Patient? patient;
+  Doctor? doctor;
+  Timings? timings;
 
-  Data(
-      {this.id,
-      this.user,
-      this.description,
-      this.image,
-      this.experience,
-      this.rating,
-      this.noOfPatients,
-      this.specializations,
-      this.qualifications,
-      this.slot});
+  Data({this.id, this.patient, this.doctor, this.timings});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
-    description = json['description'];
-    image = json['image'];
-    experience = json['experience'];
-    rating = json['rating'];
-    noOfPatients = json['no_of_patients'];
-    specializations = json['specializations'] != null
-        ? Specializations.fromJson(json['specializations'])
-        : null;
-    qualifications = json['qualifications'] != null
-        ? Qualifications.fromJson(json['qualifications'])
-        : null;
-    slot = json['slot'] != null ? Slot.fromJson(json['slot']) : null;
+    patient =
+        json['patient'] != null ? Patient.fromJson(json['patient']) : null;
+    doctor = json['doctor'] != null ? Doctor.fromJson(json['doctor']) : null;
+    timings =
+        json['timings'] != null ? Timings.fromJson(json['timings']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = id;
+    if (patient != null) {
+      data['patient'] = patient!.toJson();
+    }
+    if (doctor != null) {
+      data['doctor'] = doctor!.toJson();
+    }
+    if (timings != null) {
+      data['timings'] = timings!.toJson();
+    }
+    return data;
+  }
+}
+
+class Patient {
+  int? id;
+  String? name;
+  int? age;
+  String? gender;
+  User? user;
+
+  Patient({this.id, this.name, this.age, this.gender, this.user});
+
+  Patient.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    age = json['age'];
+    gender = json['gender'];
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['name'] = name;
+    data['age'] = age;
+    data['gender'] = gender;
     if (user != null) {
       data['user'] = user!.toJson();
-    }
-    data['description'] = description;
-    data['image'] = image;
-    data['experience'] = experience;
-    data['rating'] = rating;
-    data['no_of_patients'] = noOfPatients;
-    if (specializations != null) {
-      data['specializations'] = specializations!.toJson();
-    }
-    if (qualifications != null) {
-      data['qualifications'] = qualifications!.toJson();
-    }
-    if (slot != null) {
-      data['slot'] = slot!.toJson();
     }
     return data;
   }
@@ -119,6 +117,76 @@ class User {
     data['registered_at'] = registeredAt;
     data['confirmed'] = confirmed;
     data['role'] = role;
+    return data;
+  }
+}
+
+class Doctor {
+  int? id;
+  User? user;
+  String? description;
+  String? image;
+  int? experience;
+  double? rating;
+  int? noOfPatients;
+  Specializations? specializations;
+  Qualifications? qualifications;
+  List<Slot>? slot;
+
+  Doctor(
+      {this.id,
+      this.user,
+      this.description,
+      this.image,
+      this.experience,
+      this.rating,
+      this.noOfPatients,
+      this.specializations,
+      this.qualifications,
+      this.slot});
+
+  Doctor.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    description = json['description'];
+    image = json['image'];
+    experience = json['experience'];
+    rating = json['rating'];
+    noOfPatients = json['no_of_patients'];
+    specializations = json['specializations'] != null
+        ? Specializations.fromJson(json['specializations'])
+        : null;
+    qualifications = json['qualifications'] != null
+        ? Qualifications.fromJson(json['qualifications'])
+        : null;
+    if (json['slot'] != null) {
+      slot = <Slot>[];
+      json['slot'].forEach((v) {
+        slot!.add(Slot.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    if (user != null) {
+      data['user'] = user!.toJson();
+    }
+    data['description'] = description;
+    data['image'] = image;
+    data['experience'] = experience;
+    data['rating'] = rating;
+    data['no_of_patients'] = noOfPatients;
+    if (specializations != null) {
+      data['specializations'] = specializations!.toJson();
+    }
+    if (qualifications != null) {
+      data['qualifications'] = qualifications!.toJson();
+    }
+    if (slot != null) {
+      data['slot'] = slot!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
@@ -169,29 +237,6 @@ class Qualifications {
 }
 
 class Slot {
-  List<SlotData>? slotData;
-
-  Slot({this.slotData});
-
-  Slot.fromJson(Map<String, dynamic> json) {
-    if (json['slot_data'] != null) {
-      slotData = <SlotData>[];
-      json['slot_data'].forEach((v) {
-        slotData!.add(SlotData.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    if (slotData != null) {
-      data['slot_data'] = slotData!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class SlotData {
   int? id;
   String? day;
   String? start;
@@ -200,7 +245,7 @@ class SlotData {
   int? appointmentDuration;
   int? numSlots;
 
-  SlotData(
+  Slot(
       {this.id,
       this.day,
       this.start,
@@ -209,7 +254,7 @@ class SlotData {
       this.appointmentDuration,
       this.numSlots});
 
-  SlotData.fromJson(Map<String, dynamic> json) {
+  Slot.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     day = json['day'];
     start = json['start'];
@@ -228,6 +273,30 @@ class SlotData {
     data['consultation_fee'] = consultationFee;
     data['appointment_duration'] = appointmentDuration;
     data['num_slots'] = numSlots;
+    return data;
+  }
+}
+
+class Timings {
+  Slot? slot;
+  String? occurringDate;
+  int? slotsBooked;
+
+  Timings({this.slot, this.occurringDate, this.slotsBooked});
+
+  Timings.fromJson(Map<String, dynamic> json) {
+    slot = json['slot'] != null ? Slot.fromJson(json['slot']) : null;
+    occurringDate = json['occurring_date'];
+    slotsBooked = json['slots_booked'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    if (slot != null) {
+      data['slot'] = slot!.toJson();
+    }
+    data['occurring_date'] = occurringDate;
+    data['slots_booked'] = slotsBooked;
     return data;
   }
 }

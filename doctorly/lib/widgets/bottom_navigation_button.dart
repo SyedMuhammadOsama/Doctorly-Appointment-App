@@ -1,19 +1,21 @@
-import 'package:doctorly/widgets/customized_text_widget.dart';
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 class BottomNavigationButton extends StatelessWidget {
   final String text;
   VoidCallback onPressed;
-  BottomNavigationButton(this.text, this.onPressed);
+  BottomNavigationButton(this.text, this.onPressed, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        margin: const EdgeInsets.all(15),
+        margin: const EdgeInsets.all(10),
         width: double.infinity,
-        height: 70,
+        height: 60,
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
               Theme.of(context).primaryColor,
@@ -21,12 +23,12 @@ class BottomNavigationButton extends StatelessWidget {
             ], begin: Alignment.topLeft, end: Alignment.bottomRight),
             borderRadius: BorderRadius.circular(15)),
         child: Center(
-          child: CustomizedTextWidget(
-            text,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+          child: Text(text,
+              style:
+                  Theme.of(context).textTheme.bodyLarge?.merge(const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ))),
         ),
       ),
     );

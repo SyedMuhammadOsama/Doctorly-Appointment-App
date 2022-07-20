@@ -1,12 +1,15 @@
-import 'package:doctorly/widgets/customized_text_widget.dart';
 import 'package:flutter/material.dart';
 
 class DrawerListTile extends StatelessWidget {
   final String text;
   final IconData icon;
   final VoidCallback navigator;
-  DrawerListTile(
-      {required this.text, required this.icon, required this.navigator});
+  const DrawerListTile(
+      {Key? key,
+      required this.text,
+      required this.icon,
+      required this.navigator})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -16,7 +19,7 @@ class DrawerListTile extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         child: ListTile(
           onTap: navigator,
-          title: CustomizedTextWidget(text, fontSize: 20),
+          title: Text(text, style: Theme.of(context).textTheme.bodyLarge),
           leading: Icon(
             icon,
             size: 25,

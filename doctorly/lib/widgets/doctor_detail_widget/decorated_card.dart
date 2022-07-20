@@ -1,18 +1,21 @@
-import 'package:doctorly/models/parsed/doct_by_id_api_parsed.dart';
-import 'package:doctorly/models/state/doct_by_id_state.dart';
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class DecoratedCard extends StatelessWidget {
   final String textQuantity;
   final String text;
   IconData icon;
   DecoratedCard(
-      {required this.textQuantity, required this.text, required this.icon});
+      {Key? key,
+      required this.textQuantity,
+      required this.text,
+      required this.icon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 120,
       width: 100,
       child: Card(
@@ -42,12 +45,16 @@ class DecoratedCard extends StatelessWidget {
               margin: const EdgeInsets.only(top: 7),
               child: Text(
                 textQuantity,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.merge(const TextStyle(fontWeight: FontWeight.bold)),
               ),
             ),
             Text(
               text,
-              style: TextStyle(color: Colors.grey),
+              style: Theme.of(context).textTheme.bodySmall?.merge(
+                  const TextStyle(color: Colors.grey, wordSpacing: 1.5)),
             )
           ],
         ),

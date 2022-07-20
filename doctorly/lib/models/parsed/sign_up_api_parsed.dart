@@ -30,15 +30,15 @@ class SignUpApiParsed {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['registered_at'] = this.registeredAt;
-    data['confirmed'] = this.confirmed;
-    data['dob'] = this.dob;
-    data['gender'] = this.gender;
-    data['role'] = this.role;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['name'] = name;
+    data['email'] = email;
+    data['registered_at'] = registeredAt;
+    data['confirmed'] = confirmed;
+    data['dob'] = dob;
+    data['gender'] = gender;
+    data['role'] = role;
     return data;
   }
 }

@@ -7,11 +7,13 @@ class DoctorContainer extends StatelessWidget {
   final String qualification;
   final VoidCallback navigator;
   const DoctorContainer(
-      {required this.doctorImage,
+      {Key? key,
+      required this.doctorImage,
       required this.doctorName,
       required this.categoryName,
       required this.qualification,
-      required this.navigator});
+      required this.navigator})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,38 +27,58 @@ class DoctorContainer extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Container(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ClipOval(
-                  child: Image.network(doctorImage),
-                ),
-                Flexible(
-                  child: Text(
-                    doctorName,
-                    maxLines: 1,
-                    style: TextStyle(height: 2),
-                  ),
-                ),
-                Flexible(
-                  child: Text(
-                    categoryName,
-                    maxLines: 1,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: SafeArea(
+              child: Column(
+                children: [
+                  ClipOval(
+                    child: Image.network(
+                      doctorImage,
+                      width: 120,
                     ),
                   ),
-                ),
-                Flexible(
-                  child: Text(
-                    qualification,
-                    maxLines: 1,
-                    style: TextStyle(height: 1.5),
+                  const Spacer(),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Text(
+                        doctorName,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyMedium?.merge(
+                            const TextStyle(fontWeight: FontWeight.w500)),
+                        maxLines: 1,
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Text(
+                        categoryName,
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.merge(const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Text(
+                        qualification,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        maxLines: 1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

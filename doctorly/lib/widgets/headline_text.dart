@@ -7,7 +7,8 @@ class HeadlineTextWidget extends StatelessWidget {
   final double left;
   final double right;
   const HeadlineTextWidget(this.text,
-      {this.top = 0, this.bottom = 0, this.left = 10, this.right = 0});
+      {Key? key, this.top = 0, this.bottom = 0, this.left = 10, this.right = 0})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class HeadlineTextWidget extends StatelessWidget {
           EdgeInsets.only(top: top, bottom: bottom, left: left, right: right),
       child: Text(
         text,
-        style: Theme.of(context).textTheme.headline6,
+        style: Theme.of(context).textTheme.titleMedium,
       ),
     );
   }

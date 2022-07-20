@@ -1,10 +1,16 @@
 import 'package:doctorly/drawer/drawer_header_widget.dart';
 import 'package:doctorly/drawer/drawer_list_tile.dart';
-import 'package:doctorly/screens/Signin_screen.dart';
+
+import 'package:doctorly/models/state/patient_history_state.dart';
+import 'package:doctorly/models/user_http_class.dart';
+
 import 'package:doctorly/screens/home_page.dart';
 import 'package:doctorly/screens/slot_history_screen.dart';
-import 'package:doctorly/widgets/customized_text_widget.dart';
+
+import 'package:doctorly/widgets/logout_widget.dart';
 import 'package:flutter/material.dart';
+
+import 'package:provider/provider.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({Key? key}) : super(key: key);
@@ -19,7 +25,7 @@ class DrawerWidget extends StatelessWidget {
       child: ListView(
         children: [
           const DrawerHeaderWidget(),
-          const SizedBox(
+          Container(
             height: 30,
           ),
           DrawerListTile(
@@ -31,15 +37,13 @@ class DrawerWidget extends StatelessWidget {
           DrawerListTile(
               text: 'History',
               icon: Icons.history,
-              navigator: () {
+              navigator: () async {
+                var response = await UserHttpClass().getHistory(context);
+                Provider.of<PatientHistoryState>(context, listen: false)
+                    .updateState(response);
                 Navigator.popAndPushNamed(context, SlotHitoryScreen.routeName);
               }),
-          DrawerListTile(
-              text: 'Logout',
-              icon: Icons.logout,
-              navigator: () {
-                Navigator.popAndPushNamed(context, SignInScreen.routeName);
-              })
+          const LogoutWidget()
         ],
       ),
     );

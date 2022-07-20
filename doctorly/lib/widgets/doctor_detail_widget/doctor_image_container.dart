@@ -1,6 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace
-
-import 'package:doctorly/models/state/doct_by_id_state.dart';
+import '/models/state/doct_by_id_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/customized_text_widget.dart';
-
 class DrawerHeaderWidget extends StatelessWidget {
   const DrawerHeaderWidget({Key? key}) : super(key: key);
 
@@ -10,13 +8,6 @@ class DrawerHeaderWidget extends StatelessWidget {
     return DrawerHeader(
       child: Container(
         margin: const EdgeInsets.all(10),
-        alignment: Alignment.bottomLeft,
-        child: CustomizedTextWidget(
-          'User Name',
-          fontSize: 23,
-          fontWeight: FontWeight.bold,
-          alignment: TextAlign.start,
-        ),
       ),
       decoration: const BoxDecoration(
         image: DecorationImage(

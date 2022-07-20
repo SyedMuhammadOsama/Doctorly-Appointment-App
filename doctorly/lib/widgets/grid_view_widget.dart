@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class GridViewWidget extends StatelessWidget {
   final Widget gridViewItem;
   final ScrollPhysics? scrolling;
-  const GridViewWidget({required this.gridViewItem, this.scrolling});
+  const GridViewWidget({Key? key, required this.gridViewItem, this.scrolling})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

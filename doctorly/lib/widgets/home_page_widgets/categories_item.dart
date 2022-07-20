@@ -5,10 +5,12 @@ class Categoriesitem extends StatelessWidget {
   final String categoryText;
   final VoidCallback navigator;
 
-  Categoriesitem(
-      {required this.categoryImage,
+  const Categoriesitem(
+      {Key? key,
+      required this.categoryImage,
       required this.categoryText,
-      required this.navigator});
+      required this.navigator})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class Categoriesitem extends StatelessWidget {
           width: 80,
           height: 85,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ClipOval(
                 child: Image.network(
@@ -32,11 +34,17 @@ class Categoriesitem extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              Flexible(
-                child: Text(
-                  categoryText,
-                  maxLines: 1,
-                  style: const TextStyle(fontSize: 17),
+              Container(
+                margin: const EdgeInsets.only(
+                  top: 5,
+                ),
+                child: Center(
+                  child: Text(
+                    categoryText,
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ),
               )
             ],

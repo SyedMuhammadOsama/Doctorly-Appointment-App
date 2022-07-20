@@ -1,21 +1,37 @@
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatelessWidget {
+  final VoidCallback onPressed;
+  final TextEditingController controller;
+  const TextFieldWidget({
+    Key? key,
+    required this.onPressed,
+    required this.controller,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
         margin: const EdgeInsets.only(top: 20, bottom: 10, left: 10, right: 10),
         child: TextField(
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-          ),
+          controller: controller,
+          style: Theme.of(context).textTheme.bodyLarge?.merge(const TextStyle(
+                color: Colors.black,
+              )),
           cursorColor: Colors.black,
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.all(25),
+            suffixIcon: IconButton(
+              icon: Icon(Icons.search),
+              color: Theme.of(context).primaryColor,
+              onPressed: onPressed,
+            ),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
             hintText: 'Search',
-            hintStyle: const TextStyle(color: Color(0xFF9B8F8F), fontSize: 20),
-            // fillColor: const Color(0xFF131212),
+            hintStyle: Theme.of(context)
+                .textTheme
+                .bodyLarge
+                ?.merge(const TextStyle(color: Color(0xFF9B8F8F))),
             filled: true,
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50),

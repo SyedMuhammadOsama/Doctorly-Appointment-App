@@ -1,5 +1,4 @@
-import 'package:doctorly/screens/doctor_by_category_screen.dart';
-import 'package:provider/provider.dart';
+import '/screens/doctor_by_category_screen.dart';
 
 import '/widgets/home_page_widgets/categories_item.dart';
 import 'package:flutter/material.dart';

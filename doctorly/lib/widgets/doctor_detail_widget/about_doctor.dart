@@ -1,4 +1,4 @@
-import 'package:doctorly/models/state/doct_by_id_state.dart';
+import '/models/state/doct_by_id_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,13 +8,16 @@ class AboutDoctor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         left: 25,
       ),
       child: Text(
         Provider.of<DoctByIdState>(context).doctByIdStateData?.description ??
             '',
-        style: TextStyle(fontSize: 17, height: 1.5, wordSpacing: 1.5),
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.merge(const TextStyle(height: 1.5, wordSpacing: 1.5)),
       ),
     );
   }

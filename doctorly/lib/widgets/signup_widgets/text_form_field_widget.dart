@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
@@ -5,7 +7,11 @@ class TextFormFieldWidget extends StatelessWidget {
   final String hint;
   final TextEditingController controller;
   TextFormFieldWidget(
-      {required this.validator, required this.hint, required this.controller});
+      {Key? key,
+      required this.validator,
+      required this.hint,
+      required this.controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +20,18 @@ class TextFormFieldWidget extends StatelessWidget {
         child: TextFormField(
           controller: controller,
           validator: validator,
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-          ),
+          style: Theme.of(context).textTheme.bodyLarge?.merge(const TextStyle(
+                color: Colors.black,
+              )),
           cursorColor: Colors.black,
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.all(25),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 25, vertical: 18),
             hintText: hint,
-            hintStyle: const TextStyle(color: Color(0xFF9B8F8F), fontSize: 20),
-            // fillColor: const Color(0xFF131212),
+            hintStyle: Theme.of(context)
+                .textTheme
+                .bodyLarge
+                ?.merge(const TextStyle(color: Color(0xFF9B8F8F))),
             filled: true,
             errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50),

@@ -1,67 +1,43 @@
-import 'package:doctorly/models/parsed/sign_in_api_parsed.dart';
-import 'package:doctorly/models/state/sign_in_state.dart';
-import 'package:doctorly/screens/home_page.dart';
-import 'package:doctorly/screens/signup_screen.dart';
-import 'package:doctorly/widgets/bottom_navigation_button.dart';
-import 'package:doctorly/widgets/customized_text_widget.dart';
-import 'package:doctorly/widgets/headline_text.dart';
-import 'package:doctorly/widgets/signup_widgets/text_form_field_widget.dart';
+// ignore_for_file: must_be_immutable, file_names
+
+import '/models/state/sign_in_state.dart';
+import '/models/user_http_class.dart';
+import '/screens/home_page.dart';
+import '/screens/signup_screen.dart';
+import '/widgets/bottom_navigation_button.dart';
+
+import '/widgets/headline_text.dart';
+import '/widgets/signup_widgets/text_form_field_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
 import 'package:provider/provider.dart';
 
-class SignInScreen extends StatefulWidget {
+class SignInScreen extends StatelessWidget {
   static const routeName = 'SignInScreen';
 
-  @override
-  State<SignInScreen> createState() => _SignInScreenState();
-}
-
-class _SignInScreenState extends State<SignInScreen> {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
 
-  Future<SignInApiParsed?> login() async {
-    try {
-      var url = Uri.parse(
-          'http://doctorlyapi.japaneast.cloudapp.azure.com/auth/get_token');
-      String basicAuth = 'Basic ' +
-          base64.encode(utf8
-              .encode('${emailController.text}:${passwordController.text}'));
-      var response = await http
-          .post(url, headers: <String, String>{'authorization': basicAuth});
-      var decodedJson = jsonDecode(response.body) as Map<String, dynamic>;
-      var loginResponse = SignInApiParsed.fromJson(decodedJson);
-
-      print(decodedJson);
-      print(loginResponse.token);
-
-      return loginResponse;
-    } catch (e) {
-      print(e);
-    }
-  }
+  SignInScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign In'),
+        title: const Text('Sign In'),
         backgroundColor: Theme.of(context).primaryColor,
       ),
       resizeToAvoidBottomInset: false,
       body: Form(
         child: Builder(builder: (context) {
           return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(20),
+              Padding(
+                padding: const EdgeInsets.all(20),
                 child: Text(
                   'Sign In',
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.headline4,
                 ),
               ),
               Column(
@@ -100,10 +76,14 @@ class _SignInScreenState extends State<SignInScreen> {
               const Spacer(),
               BottomNavigationButton('Sign In', () async {
                 if (Form.of(context)?.validate() ?? false) {
-                  var loginResponse = await login();
+                  var loginResponse = await UserHttpClass().login(
+                      email: emailController.text,
+                      password: passwordController.text);
                   Provider.of<SignInState>(context, listen: false)
                       .updateState(loginResponse);
-                  Navigator.pushNamed(context, HomePage.routeName);
+                  if (loginResponse != null) {
+                    Navigator.pushNamed(context, HomePage.routeName);
+                  }
                 }
               }),
               Padding(
@@ -111,20 +91,22 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CustomizedTextWidget(
+                    Text(
                       "Don't have an account?",
-                      fontSize: 18,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     TextButton(
                         onPressed: () {
                           Navigator.pushNamed(context, SignUpScreen.routeName);
                         },
-                        child: CustomizedTextWidget(
-                          'Sign Up',
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        )),
+                        child: Text('Sign Up',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge
+                                ?.merge(TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontWeight: FontWeight.bold,
+                                )))),
                   ],
                 ),
               ),

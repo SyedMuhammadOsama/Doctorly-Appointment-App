@@ -9,7 +9,7 @@ class MixCardRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 150,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -34,7 +34,7 @@ class MixCardRow extends StatelessWidget {
                     ?.rating
                     .toString() ??
                 '',
-            text: 'rating',
+            text: 'Rating',
             icon: Icons.star_border_outlined,
           ),
         ],
