@@ -11,10 +11,7 @@ class DrawerHeaderWidget extends StatelessWidget {
       ),
       decoration: const BoxDecoration(
         image: DecorationImage(
-          fit: BoxFit.cover,
-          image: NetworkImage(
-              'https://thumbs.dreamstime.com/z/stethoscope-medical-documents-doctor-table-purple-background-close-up-view-directly-above-medical-exam-health-care-170135332.jpg'),
-        ),
+            fit: BoxFit.cover, image: AssetImage("assets/header.jpg")),
       ),
     );
   }

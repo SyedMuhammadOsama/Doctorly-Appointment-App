@@ -77,8 +77,8 @@ class SignInScreen extends StatelessWidget {
               BottomNavigationButton('Sign In', () async {
                 if (Form.of(context)?.validate() ?? false) {
                   var loginResponse = await UserHttpClass().login(
-                      email: emailController.text,
-                      password: passwordController.text);
+                      email: emailController.text.trim(),
+                      password: passwordController.text.trim());
                   Provider.of<SignInState>(context, listen: false)
                       .updateState(loginResponse);
                   if (loginResponse != null) {

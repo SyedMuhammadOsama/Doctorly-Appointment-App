@@ -89,9 +89,9 @@ class SignUpScreen extends StatelessWidget {
                 BottomNavigationButton('Sign Up', () async {
                   if (Form.of(context)?.validate() ?? false) {
                     var signUpResponse = await UserHttpClass().signUp(
-                        name: nameController.text,
-                        email: emailController.text,
-                        password: passwordController.text);
+                        name: nameController.text.trim(),
+                        email: emailController.text.trim(),
+                        password: passwordController.text.trim());
                     Provider.of<SigUpState>(context, listen: false)
                         .updateState(signUpResponse);
                     Navigator.pushNamed(context, SignInScreen.routeName);

@@ -12,7 +12,7 @@ class SlotBookingScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        title: const Text('Slot Bokking'),
+        title: const Text('Slot Booking'),
       ),
       body: SingleChildScrollView(
         child: Column(

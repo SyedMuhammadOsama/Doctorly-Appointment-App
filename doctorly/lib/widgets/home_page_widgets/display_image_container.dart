@@ -13,8 +13,8 @@ class DisplayImageContainer extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15),
-          child: Image.network(
-            'https://images.unsplash.com/photo-1624969862293-b749659ccc4e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YXBwb2ludG1lbnR8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60',
+          child: Image.asset(
+            "assets/homepage.jpg",
             fit: BoxFit.cover,
             height: 200,
             width: double.infinity,

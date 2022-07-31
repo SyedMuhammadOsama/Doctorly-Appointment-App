@@ -34,14 +34,7 @@ class DoctorByCatScreen extends StatelessWidget {
         children: [
           TextFieldWidget(
             controller: searchController,
-            onPressed: () async {
-              var doct = await UserHttpClass().getDoctByCat(
-                  context: context,
-                  specId: args['specId'],
-                  text: searchController.text);
-              await Provider.of<DoctByCatState>(context, listen: false)
-                  .updateState(doct);
-            },
+            onPressed: () {},
           ),
           GridView.builder(
             physics: const NeverScrollableScrollPhysics(),

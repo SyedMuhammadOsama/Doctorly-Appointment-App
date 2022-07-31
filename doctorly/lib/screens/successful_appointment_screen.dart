@@ -25,8 +25,8 @@ class SuccessfulAppointmentScreen extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(top: 10, bottom: 10),
             child: ClipRRect(
-              child: Image.network(
-                'https://cdn-icons-png.flaticon.com/512/1251/1251817.png',
+              child: Image.asset(
+                "assets/message.png",
                 width: 250,
               ),
             ),

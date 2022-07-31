@@ -106,10 +106,10 @@ class UserHttpClass {
   }
 
   Future<DoctorsApiParsed?> getDoctByCat(
-      {required context, required specId, text}) async {
+      {required context, required specId}) async {
     try {
       var url = Uri.parse(
-          'http://doctorlyapi.japaneast.cloudapp.azure.com/misc/search/sp/${specId}?name=$text');
+          'http://doctorlyapi.japaneast.cloudapp.azure.com/misc/doctors/specialization/${specId}');
       var response = await http.get(url, headers: {
         'Authorization':
             'Bearer ${Provider.of<SignInState>(context, listen: false).loginDataState?.token}'

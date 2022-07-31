@@ -1,3 +1,6 @@
+import 'package:doctorly/widgets/slot_booking_widgets/int_field_widget.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import '/models/state/create_appointment_state.dart';
 import '/models/state/reg_patient_state.dart';
 import '/models/state/slots_state.dart';
@@ -62,7 +65,7 @@ class _PatientDetailsWidgetState extends State<PatientDetailsWidget> {
                     'Age',
                     top: 10,
                   ),
-                  TextFormFieldWidget(
+                  IntFieldWidget(
                     controller: ageController,
                     hint: '25',
                     validator: (textValue) {
@@ -101,7 +104,19 @@ class _PatientDetailsWidgetState extends State<PatientDetailsWidget> {
                   BottomNavigationButton(
                     'Set Appointment',
                     () async {
-                      if ((Form.of(context)?.validate() ?? false) &&
+                      if (Provider.of<SlotsState>(context, listen: false)
+                                  .selectedSlotId ==
+                              null ||
+                          Provider.of<SlotsState>(context, listen: false)
+                                  .selectedSlotId ==
+                              -1) {
+                        Fluttertoast.showToast(
+                            msg: "Please select your slot",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.SNACKBAR,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.black54);
+                      } else if ((Form.of(context)?.validate() ?? false) &&
                           gender != null &&
                           Provider.of<SlotsState>(context, listen: false)
                                   .selectedSlotId !=
