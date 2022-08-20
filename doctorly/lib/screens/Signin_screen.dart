@@ -82,7 +82,8 @@ class SignInScreen extends StatelessWidget {
                   Provider.of<SignInState>(context, listen: false)
                       .updateState(loginResponse);
                   if (loginResponse != null) {
-                    Navigator.pushNamed(context, HomePage.routeName);
+                    Navigator.pushNamedAndRemoveUntil(context,
+                        HomePage.routeName, (Route<dynamic> route) => false);
                   }
                 }
               }),
